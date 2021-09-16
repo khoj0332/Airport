@@ -53,9 +53,9 @@ typedef struct ListElement *ListElementPtr;
 typedef struct ListElement
 {
 	// Note: The memory allocated for data cannot contain any pointers to
-	//			 additional data or terminate will not work correctly; therefore,
-	//			 data must point to a contiguous block of data and contain no
-	// 		   additional pointers.
+	//		 additional data or terminate will not work correctly; therefore,
+	//		 data must point to a contiguous block of data and contain no
+	// 		 additional pointers.
 	void *pData;
 	ListElementPtr psNext;
 } ListElement;
@@ -78,34 +78,34 @@ typedef struct List
 //*************************************************************************
 extern void lstCreate (ListPtr psList);
 // results: If the list can be created, then the list exists and is empty;
-//					otherwise, ERROR_NO_LIST_CREATE if psList is NULL
+//			otherwise, ERROR_NO_LIST_CREATE if psList is NULL
 
 extern void lstTerminate (ListPtr psList);
 // results: If the list can be terminated, then the list no longer exists
-//				  and is empty; otherwise, ERROR_NO_LIST_TERMINATE
+//			and is empty; otherwise, ERROR_NO_LIST_TERMINATE
 
 extern void lstLoadErrorMessages ();
 // results:	Loads the error message strings for the error handler to use
-//					No error conditions
+//			No error conditions. // see how to do this in stk.c
 
 //*************************************************************************
 // Checking number of elements in list
 //*************************************************************************
 extern int lstSize (const ListPtr psList);
 // results: Returns the number of elements in the list
-// 					error code priority: ERROR_INVALID_LIST
+// 			error code priority: ERROR_INVALID_LIST
 
 extern bool lstIsEmpty (const ListPtr psList);
 // results: If list is empty, return true; otherwise, return false
-// 					error code priority: ERROR_INVALID_LIST
+// 			error code priority: ERROR_INVALID_LIST
 
 //*************************************************************************
 //												List Testing
 //*************************************************************************
 extern bool lstHasCurrent (const ListPtr psList);
-// results: Returns true if the current node is not NULL; otherwise, false
-//					is returned
-// 				  error code priority: ERROR_INVALID_LIST
+// results: Returns true if the current node is not NULL;
+//			otherwise, false is returned
+// 			error code priority: ERROR_INVALID_LIST
 
 extern bool lstHasNext (const ListPtr psList);
  // results: Returns true if the current node has a successor; otherwise,
@@ -120,38 +120,38 @@ extern void *lstPeek (const ListPtr psList, void *pBuffer, int size);
 // results:   The value of the current element is returned
 // IMPORTANT: Do not change current
 //            error code priority: ERROR_INVALID_LIST, ERROR_NULL_PTR,
-//											           ERROR_EMPTY_LIST, ERROR_NO_CURRENT
+//							       ERROR_EMPTY_LIST, ERROR_NO_CURRENT
 
 extern void *lstPeekNext (const ListPtr psList, void *pBuffer, int size);
 // requires:  List contains two or more elements and current is not last
 // results:   The data value of current's successor is returned
 // IMPORTANT: Do not change current
 //            error code priority: ERROR_INVALID_LIST, ERROR_NULL_PTR,
-//											           ERROR_EMPTY_LIST, ERROR_NO_CURRENT,
-//																 ERROR_NO_NEXT
+//								   ERROR_EMPTY_LIST, ERROR_NO_CURRENT,
+//								   ERROR_NO_NEXT
 
 //*************************************************************************
 //							Updating current
 //*************************************************************************
 extern void lstFirst (ListPtr psList);
 // requires:  List is not empty
-// results: 	If the list is not empty, current is changed to the first element
-//          	error code priority: ERROR_INVALID_LIST,
-//															 	 ERROR_EMPTY_LIST
+// results:   If the list is not empty, current is changed to the first element
+//            error code priority: ERROR_INVALID_LIST,
+//								   ERROR_EMPTY_LIST
 
 extern void lstNext (ListPtr psList);
 // requires:  List is not empty
-// results:   If the list is not empty, current is changed to the
-//						successor of the current element
+// results:   If the list is not empty,
+//			  current is changed to the	successor of the current element
 //            error code priority: ERROR_INVALID_LIST,
-//																 ERROR_EMPTY_LIST, ERROR_NO_CURRENT
+//								   ERROR_EMPTY_LIST, ERROR_NO_CURRENT
 
 extern void lstLast (ListPtr psList);
 // requires:  List is not empty
-// results:   If the list is not empty, current is changed to last
-//						if it exists
+// results:   If the list is not empty,
+//		      current is changed to last if it exists
 //            error code priority: ERROR_INVALID_LIST,
-//																 ERROR_EMPTY_LIST
+//								   ERROR_EMPTY_LIST
 
 //*************************************************************************
 //									Insertion, Deletion, and Updating
@@ -161,10 +161,10 @@ extern void lstInsertAfter (ListPtr psList, const void *pBuffer, int size);
 // requires: List is not full
 // results:  If the list is not empty, insert the new element as the
 //           successor of the current element and make the inserted element
-//           the current element; otherwise, insert element and make it
-//					 current.
+//           the current element;
+//			 otherwise, insert element and make it current.
 //           error code priority: ERROR_INVALID_LIST, ERROR_NULL_PTR,
-//																ERROR_NO_CURRENT
+//								  ERROR_NO_CURRENT
 
 extern void *lstDeleteCurrent (ListPtr psList, void *pBuffer, int size);
 // requires: List is not empty
